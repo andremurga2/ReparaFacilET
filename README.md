@@ -1,65 +1,156 @@
-ReparaFacil
+# ReparaFácil
 
-1. Caso elegido y alcance
+## Nombre de la aplicación
 
-Caso: ReparaFacil – Aplicación de servicios técnicos a domicilio.
-Alcance EP3: Diseño de UI, validaciones, navegación, gestión de estado, persistencia local y uso de recursos nativos (cámara y galería).
+**ReparaFácil**
 
-Principales puntos del proyecto:
-1. Login y Registro de usuarios con navegación según tipo (Cliente/Técnico).
-2. Home Cliente y Home Técnico con paso de datos (nombre y email).
-3. Pantalla de Perfil con avatar editable (cámara o galería) y persistencia local.
+---
 
-Otras características:
-- Gestión de estado con ViewModel y StateFlow.
-- Persistencia de avatar usando DataStore.
-- Implementacion de avatar por defecto cuando no hay imagen cargada.
+## 👥 Integrantes del proyecto
 
-2. Requisitos y ejecución
+* **Benjamin Verdejo**
+* **Andre Murga**
 
-Stack: Kotlin, Jetpack Compose, Navigation Compose, Coil, DataStore, Android SDK 24+.
+---
 
-Instalación:
+## 📖 Descripción general
 
-Abrir en Android Studio y sincronizar Gradle.
+**ReparaFácil** es una aplicación móvil Android desarrollada en **Kotlin**, orientada a la **gestión de servicios técnicos**. El sistema permite a distintos tipos de usuarios interactuar según su rol (**cliente, técnico y administrador**), facilitando la solicitud, asignación y seguimiento de servicios.
 
-Ejecución:
-git clone https://github.com/andremurga2/ReparaFacil.git
-Ejecutar en un emulador o dispositivo Android 16+, preferentemente con cámara habilitada.
+La aplicación utiliza **Jetpack Compose** para la interfaz gráfica y sigue una arquitectura por capas, consumiendo servicios a través de **APIs REST**.
 
-3. Arquitectura y flujo
+---
 
-Estructura de carpetas:
-- ui.screens → Pantallas Compose (Login, Registro, Home, Perfil, Agenda, Garantía).
-- ui.navigation → Gestión de rutas y argumentos entre pantallas.
-- ui.components → Aca se guarda el ImagePickerDialog
-- ui.navegation → Se almacena todo lo que es la navegacion de la aplicacion a traves de AppNavigation.kt
-- viewmodel → Estado y lógica de UI.
-- viewmodel.state → Define los estados de cada pantalla (carga, éxito, error) y mantiene los datos reactivos.
-- repository → Acceso a datos y persistencia local, además de la lógica de negocio simple para obtener/guardar información.
-- data → DTOs, recursos y utilidades generales.
-- data.local → Maneja persistencia local, como SessionManager y almacenamiento de avatar con DataStore.
-- data.remote → Comunicación con APIs externas, DTOs de request/response y servicios como ApiService.
+## Objetivo del proyecto
 
-Gestión de estado: ViewModel + StateFlow para mostrar avatar, mensajes de error y cargar datos.
-Navegación: Stack navigation con argumentos (nombre/email), botón de backstack para cerrar pantallas y navegación condicional según tipo de usuario.
+Desarrollar una aplicación Android funcional que demuestre:
 
-4. Funcionalidades
+* Uso de Kotlin y Jetpack Compose
+* Arquitectura limpia y separación de responsabilidades
+* Consumo de APIs REST
+* Manejo de estados y navegación
+* Control de acceso mediante roles
 
-- Formulario validado para login y registro.
-- Navegación entre pantallas con backstack.
-- Uso de recursos nativos: cámara y galería con permisos y fallback.
-- Avatar por defecto si no hay imagen disponible.
-- Botones de acción en perfil para actualizar avatar.
+---
 
-6. User flows
+## ⚙️ Funcionalidades principales
 
-Flujo principal:
-1. Usuario inicia sesión → redirigido a HomeCliente o HomeTecnico.
-2. Desde Home → acceso a Perfil, Agenda o Garantía.
-3. Perfil → usuario puede actualizar avatar desde galería o cámara, con persistencia local.
-4. Botón "Cerrar" → vuelve a Login.
+### - Autenticación
 
-Casos de error:
-- Imagen de avatar no disponible → se muestra avatar por defecto.
-- Error en carga de avatar → se notifica en UI.
+* Inicio de sesión de usuarios
+* Registro de nuevos usuarios
+* Persistencia de sesión mediante token
+* Redirección automática según rol
+
+### - Cliente
+
+* Creación de solicitudes de servicio
+* Visualización de servicios asociados
+* Detalle y seguimiento del estado del servicio
+* Visualización de notificaciones
+
+### - Técnico
+
+* Visualización de servicios asignados
+* Consulta de detalle y seguimiento del servicio
+
+### - Administrador
+
+* Supervisión general del sistema
+* Gestión y control de información
+
+---
+
+## Endpoints utilizados
+
+### - Endpoints propios (Backend)
+
+Consumidos desde la app móvil mediante **Retrofit**:
+
+* `POST /auth/login` → Inicio de sesión
+* `POST /auth/register` → Registro de usuario
+* `GET /servicios` → Obtención de servicios
+* `POST /servicios` → Creación de servicio
+* `GET /servicios/{id}` → Detalle de servicio
+* `GET /seguimiento/{servicioId}` → Seguimiento del servicio
+* `GET /notificaciones` → Notificaciones del usuario
+
+---
+
+## Arquitectura del proyecto
+
+El proyecto está organizado en capas:
+
+### - data
+
+* `remote`: definición de APIs y DTOs
+* `repository`: lógica de acceso a datos
+* `local`: manejo de sesión (`SessionManager`)
+
+### - ui
+
+* `screens`: pantallas organizadas por rol
+* `viewmodel`: manejo de estado
+* `navigation`: control de navegación
+* `theme`: estilos y colores
+
+---
+
+## Instrucciones para ejecutar el proyecto
+
+1. Clonar el repositorio:
+
+```bash
+git clone https://github.com/andremurga2/ReparaFacilET.git
+```
+
+2. Abrir el proyecto en **Android Studio**
+3. Sincronizar Gradle
+4. Ejecutar en un emulador o dispositivo físico
+
+---
+
+## APK firmado
+
+* El APK firmado se genera en modo **Release**
+* Ruta de salida:
+
+```
+app/build/outputs/apk/release/app-release.apk
+```
+
+### Keystore
+
+* El archivo `.jks` se mantiene fuera del repositorio por seguridad
+* Ejemplo de ubicación local:
+
+```
+C:/Users/benja/Documents/keystore/reparafacil-release.jks
+```
+
+---
+
+## Código fuente
+
+* El código fuente de la **aplicación móvil Android** está incluido en este repositorio
+* El backend se comunica mediante **API REST**
+
+---
+
+## Estado del proyecto
+
+* ✔ Autenticación funcional
+* ✔ Gestión de servicios
+* ✔ Navegación por roles
+* ✔ Creación y seguimiento de servicios
+* ✔ APK Release generado
+
+---
+
+## Contexto académico
+
+Proyecto desarrollado como parte de una **evaluación**, cumpliendo los requisitos técnicos y funcionales solicitados.
+
+---
+
+> ReparaFácil — gestión de servicios técnicos
