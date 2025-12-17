@@ -13,7 +13,7 @@
 
 ---
 
-## 📖 Descripción general
+## Descripción general
 
 **ReparaFácil** es una aplicación móvil Android desarrollada en **Kotlin**, orientada a la **gestión de servicios técnicos**. El sistema permite a distintos tipos de usuarios interactuar según su rol (**cliente, técnico y administrador**), facilitando la solicitud, asignación y seguimiento de servicios.
 
