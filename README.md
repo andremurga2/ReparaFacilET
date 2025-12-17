@@ -33,7 +33,7 @@ Desarrollar una aplicación Android funcional que demuestre:
 
 ---
 
-## ⚙️ Funcionalidades principales
+## Funcionalidades principales
 
 ### - Autenticación
 
